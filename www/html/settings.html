@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Settings</title>
+    <link rel="stylesheet" type="text/css" href="../css/settings.css" />
+</head>
+<body>
+    <div id="param-head">
+        <span id="titre">Paramètres</span>
+        <div id="fleche">
+            <img src="../img/expand-arrow.png" class="arrow-img" onclick="window.location.href='homepage.html'"/>
+        </div>
+    </div>
+
+    <div id="login">
+        <span>LOGIN</span>
+        <input type="text" id="userlogin" oninput="changeLogin(this)">
+    </div>
+    <div id="colorpicker">
+        <div>
+            <p>Choix de la couleur</p>
+        </div>
+
+        <div id="liste-matieres"></div>
+        
+    </div>
+
+    <div id="couleurmatiere" style="display: none;">
+        <div class="colorbutton" id="matiere">
+            <span class="matiere-nom"></span>
+        </div>
+        <div class="colorbutton">
+            <div class="colorpoint"></div>
+        </div>
+    </div>
+
+    <div id="color-picker" class="colorp">
+        <div class="colorp-content">
+            <span id="matiere-name"></span>
+            <span class="close" onclick="closeColorPicker();">&times;</span>
+            <br>
+            <div id="color-list">
+                <div class="color-item" style="background-color: #89defa" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #db3056" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #2a8849" onclick="selectColor(this); closeColorPicker();"></div> 
+                <div class="color-item" style="background-color: #e9d700" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #be29ec" onclick="selectColor(this); closeColorPicker();"></div>
+
+                <div class="color-item" style="background-color: #b3e1ee" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #ff6464" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #7bb38d" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #f8ed62" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #d896ff" onclick="selectColor(this); closeColorPicker();"></div>
+                
+                <div class="color-item" style="background-color: #e6eff8" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #ffbaba" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #badabf" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #fff9ae" onclick="selectColor(this); closeColorPicker();"></div>
+                <div class="color-item" style="background-color: #efbbff" onclick="selectColor(this); closeColorPicker();"></div>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="../js/settings.js"></script>
+    <script type="text/javascript" src="../js/bundle.js"></script>
+</body>
+</html>

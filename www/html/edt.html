@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <link rel="stylesheet" type="text/css" href="../css/edt.css" />
+    <title>Emploi Du Temps</title>
+</head>
+
+<body onload="getTime(); changeCSS(document.getElementById('daily'))">
+    <div id="navbar">
+        <img id="back-arrow" src="../img/expand-arrow.png" onclick="window.location.href='homepage.html'"/>
+        <div id="navbar-presentation">
+            <span id="navbar-presentation-text">emploi du temps</span>
+            <div id="navbar-date">
+                <span id="date"></span>
+            </div>
+        </div>
+        <div id="navbar-container">
+            <div class="navbar-container-item" id="daily" onclick="changeCSS(this); loadDayItems(targetDate)">Jour</div>
+            <div class="navbar-container-item" id="weekly" onclick="changeCSS(this); loadWeekItems(relativeMonday)">Semaine</div>
+            <div class="navbar-container-item" id="monthly" onclick="changeCSS(this); loadMonthItems()">Mois</div>
+        </div>
+    </div>
+
+    <div id="list-item">
+        <p id="nothingfound">Chargement ...</p>
+    </div>
+
+    <div id="edt-item-day" style="display: none;">
+        <div class="lesson-Name"></div>
+        <br>
+        <div class="lesson-Professor"></div>
+        <div class="lesson-Date">
+            <span class="lesson-Date-Start"></span>
+            /
+            <span class="lesson-Date-End"></span>
+        </div>
+        <div class="lesson-Location"><span class="lesson-Location-Number"></span></div>
+    </div>
+
+    <div id="edt-item-week" style="display: none;">
+        <span class="daytag"></span>
+    </div>
+
+    <script type="text/javascript" src="../js/edt.js"></script>
+    <script type="text/javascript" src="../js/bundle.js"></script>
+</body>
+
+</html>
