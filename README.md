@@ -47,7 +47,7 @@ lien direct : [activer votre agenda](https://web.isen-ouest.fr/uPortal/p/abonnem
 
   <img src=https://build.phonegap.com/apps/3719773/badge/2229398496/android.svg />
   
-  L'apk est disponible sur ce repository github : [lien du repository](https://github.com/aureliensimon/EDTISEN-apk)
+  [EDTISEN sur le Play Store](https://play.google.com/store/apps/details?id=com.phonegap.edtisen)
 
 * PWA
 
