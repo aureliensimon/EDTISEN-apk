@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-
 <html>
 
 <head>
+    <link rel="icon" href="../img/logo.png">
     <meta charset="utf-8" />
     <meta name="format-detection" content="telephone=no" />
     <meta name="msapplication-tap-highlight" content="no" />
@@ -10,6 +10,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <link href="https://fonts.googleapis.com/css?family=Nunito:400,700,900&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" type="text/css" href="../css/edt.css" />
+    <link rel="stylesheet" href="../lib/css/swiper.min.css">
     <title>Emploi Du Temps</title>
 </head>
 
@@ -29,26 +30,57 @@
         </div>
     </div>
 
-    <div id="list-item">
-        <p id="nothingfound">Chargement ...</p>
+    <style>
+        .swiper-container {
+            width: 100%;
+            min-height: calc(100vh - 230px);
+        }
+    </style>
+
+    <div id="list-item"></div>
+
+    <div class="swiper-container" id="swiper">
+        <div class="swiper-wrapper" id="swiper-wrapper">
+        <div class="swiper-slide" id="day0">
+            <p id="nothingfound">Chargement ...</p>
+        </div>
+        <div class="swiper-slide" id="day1"></div>
+        <div class="swiper-slide" id="day2"></div>
+        <div class="swiper-slide" id="day3"></div>
+        <div class="swiper-slide" id="day4"></div>
+        <div class="swiper-slide" id="day5"></div>
+        <div class="swiper-slide" id="day6"></div>
+        </div>
     </div>
 
     <div id="edt-item-day" style="display: none;">
         <div class="lesson-Name"></div>
         <br>
         <div class="lesson-Professor"></div>
-        <div class="lesson-Date">
-            <span class="lesson-Date-Start"></span>
-            /
-            <span class="lesson-Date-End"></span>
+        <div class="bottom-lesson">
+            <div class="lesson-Date">
+                <span class="lesson-Date-Start"></span>
+                /
+                <span class="lesson-Date-End"></span>
+            </div>
+            <div class="lesson-Location">
+                <span class="lesson-Location-Number"></span>
+            </div>
         </div>
-        <div class="lesson-Location"><span class="lesson-Location-Number"></span></div>
     </div>
 
     <div id="edt-item-week" style="display: none;">
         <span class="daytag"></span>
     </div>
 
+    <script src="../lib/js/swiper.min.js"></script>
+    <script>
+        let swiper = new Swiper('.swiper-container');
+        swiper.on('slideChange', function () {
+            targetDate = incrDate(targetDate, (-1 * (swiper.previousIndex - swiper.activeIndex)));
+            getTime();
+        });
+    </script>
     <script type="text/javascript" src="../js/edt.js"></script>
     <script type="text/javascript" src="../js/bundle.js"></script>
 </body>

@@ -96,40 +96,47 @@ function changeCSS (div) {
  * @param {date} date The day selected.
  */
 function loadDayItems (date) {
+    swiper.slideTo(0, 1, false);
     let model = document.getElementById('edt-item-day');
-    let contenu = document.getElementById('list-item');
+    let weekItems = document.getElementById('list-item');
+    while(weekItems.firstChild) weekItems.removeChild(weekItems.firstChild);
+    document.getElementById('swiper').style.display = 'block';
+
+    for (let i = 0; i < 7; i++) {
+        let contenu = document.getElementById('day' + i);
+
+        while(contenu.firstChild) contenu.removeChild(contenu.firstChild);
+
+        listeCours.forEach(function(element){
+            if(element.date == incrDate(date, i)){
+                let modelClone = model.cloneNode(true);
     
-    while(contenu.firstChild) contenu.removeChild(contenu.firstChild);
-
-    listeCours.forEach(function(element){
-        if(element.date == date){
-            let modelClone = model.cloneNode(true);
-
-            modelClone.getElementsByClassName('lesson-Name')[0].innerHTML = (element.matiere2 === ' Evénement sans titre') ? element.matiere : element.matiere2;
-            modelClone.getElementsByClassName('lesson-Name')[0].style.borderLeft = '3.5px solid ' + localStorage.getItem(element.matiere2.replace(/\s/, ''));
-            modelClone.getElementsByClassName('lesson-Professor')[0].innerHTML = element.prof;
-            modelClone.getElementsByClassName('lesson-Date-Start')[0].innerText = element.dateDebut;
-            modelClone.getElementsByClassName('lesson-Date-End')[0].innerText = element.dateFin;
-            modelClone.getElementsByClassName('lesson-Location-Number')[0].innerText = element.lieu.replace(/\s/, '');
-            modelClone.getElementsByClassName('lesson-Location-Number')[0].style.color = localStorage.getItem(element.matiere2.replace(/\s/, ''));
-            modelClone.style.display = 'block';
-
-            contenu.appendChild(modelClone);
+                modelClone.getElementsByClassName('lesson-Name')[0].innerHTML = (element.matiere2 === ' Evénement sans titre') ? element.matiere : element.matiere2;
+                modelClone.getElementsByClassName('lesson-Name')[0].style.borderLeft = '3.5px solid ' + localStorage.getItem(element.matiere2.replace(/\s/, ''));
+                modelClone.getElementsByClassName('lesson-Professor')[0].innerHTML = element.prof;
+                modelClone.getElementsByClassName('lesson-Date-Start')[0].innerText = element.dateDebut;
+                modelClone.getElementsByClassName('lesson-Date-End')[0].innerText = element.dateFin;
+                modelClone.getElementsByClassName('lesson-Location-Number')[0].innerText = element.lieu.replace(/\s/, '');
+                modelClone.getElementsByClassName('lesson-Location-Number')[0].style.color = localStorage.getItem(element.matiere2.replace(/\s/, ''));
+                modelClone.style.display = 'block';
+    
+                contenu.appendChild(modelClone);
+            }
+        });
+    
+        if (!contenu.firstChild) {
+            var node = document.createElement("P");
+            node.id = 'no-lesson-emoji';
+            var textnode = document.createTextNode("(ノ^o^)ノ");
+            node.appendChild(textnode);
+            contenu.appendChild(node);
+    
+            node = document.createElement("P");
+            node.id = 'no-lesson-text';
+            textnode = document.createTextNode("Aucun cours de prévu !");
+            node.appendChild(textnode);
+            contenu.appendChild(node);
         }
-    });
-
-    if (!contenu.firstChild) {
-        var node = document.createElement("P");
-        node.id = 'no-lesson-emoji';
-        var textnode = document.createTextNode("(ノ^o^)ノ");
-        node.appendChild(textnode);
-        contenu.appendChild(node);
-
-        node = document.createElement("P");
-        node.id = 'no-lesson-text';
-        textnode = document.createTextNode("Aucun cours de prévu !");
-        node.appendChild(textnode);
-        contenu.appendChild(node);
     }
 }
 
@@ -144,7 +151,8 @@ function loadWeekItems (targetWeek) {
     
     let model = document.getElementById('edt-item-week');
     let contenu = document.getElementById('list-item');
-
+    document.getElementById('swiper').style.display = 'none';
+    
     while(contenu.firstChild) contenu.removeChild(contenu.firstChild);
 
     for (let i = 0; i < dayTags.length; i++) {
@@ -157,12 +165,12 @@ function loadWeekItems (targetWeek) {
         modelClone.style.border = '1px solid #0478EB';
         
         // if day is selected day, set border
-        if (!(dayTagsEN.indexOf(getDayTag(targetDate)) - i)) {
+        if (targetDate == dayDate) {
             modelClone.style.border = '1px solid #DDDDDD';
         }
 
         modelClone.onclick = function () {
-            targetDate = incrDate(targetDay, -(dayTagsEN.indexOf(targetDay) - i + 1));
+            targetDate = incrDate(targetDay, -(dayTagsEN.indexOf(targetDay) - i + 1) + swiper.activeIndex);
             loadDayItems(incrDate(targetDay, -(dayTagsEN.indexOf(targetDay) - i + 1)));
             changeCSS(document.getElementById('daily'));
             getTime();
